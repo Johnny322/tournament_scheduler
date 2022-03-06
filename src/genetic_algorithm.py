@@ -158,7 +158,7 @@ def fitness(population, matches):
                                 overlaps[i][time_slot].append(team)
                             else:
                                 overlaps[i][time_slot] = [team]
-                            total_fitness += 10
+                            total_fitness += 1
             counter+=1
             prev_slot = team_list
         # print("")

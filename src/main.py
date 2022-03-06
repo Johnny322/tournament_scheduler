@@ -65,29 +65,16 @@ def get_data(filename):
 
 
 
-def run(pop_size, filename, generations = 10):
+def run(amount_of_overlaps_allowed, filename, generations = 10):
     folder = "teams/"
     sport_dict, time_slots, matches = get_data(folder+filename)
     sport_list = list(sport_dict.keys())
     population = ga.gen_pop(10,matches,time_slots,sport_list)
-    # counter = 0
-    # times = ["16:20", "17:00", "17:40", "18:20"]
-    # for time_slot in population[0]:
-    #     if time_slot % 4 == 0:
-    #         counter += 1
-    #     print('Day ', counter, ', ', times[time_slot % 4])
-    #     for sport in population[0][time_slot]:
-    #         if (population[0][time_slot][sport] == "Buffer"):
-    #             print("Buffer")
-    #         elif (population[0][time_slot][sport] != None):
-    #             i = population[0][time_slot][sport][0]
-    #             print(matches[i])
 
-    #least fit chromosome in initial_population and replace with fittest offspring
     fitness_scores, overlaps = ga.fitness(population, matches)
     fittest_idx, second_fittest_idx = ga.select(fitness_scores)
 
-    while(fitness_scores[fittest_idx] > 50):
+    while(fitness_scores[fittest_idx] > amount_of_overlaps_allowed):
         fittest = population[fittest_idx]
         second_fittest = population[second_fittest_idx]
         print("fittest: ",fitness_scores[fittest_idx])
@@ -122,6 +109,4 @@ def run(pop_size, filename, generations = 10):
         print('Day ', int(entry / 4)+1, ', ', times[(entry-1) % 4], ' and ', times[entry % 4], ' contains conflict of team(s) ', overlaps[fittest_idx][entry])
            
 
-print("Pop 10 Generations 100 on small")
-run(10, "teams.xml", 100)
-print("")
+run(5,"teams.xml", 100)
