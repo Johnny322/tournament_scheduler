@@ -13,10 +13,7 @@ def gen_chromosome(matches, time_slots, sport_list):
             gene = random.choices(range(len(matches.keys())))
 
             if len(already_used) >= len(matches.keys()):
-                if time_slot > buffer:
-                    chromosome[toast[time_slot]][sport] = "Buffer"
-                else:
-                    chromosome[toast[time_slot]][sport] = None
+                chromosome[toast[time_slot]][sport] = None
             else:
                 already_tried = already_used.copy()
                 while ((gene in already_tried) or (matches[gene[0]][2] != sport)) and (len(already_tried)<len(matches.keys())):
@@ -25,10 +22,7 @@ def gen_chromosome(matches, time_slots, sport_list):
                         already_tried.append(gene)
                     gene = random.choices(range(len(matches.keys())))
                 if(len(already_tried)>=len(matches.keys())):
-                    if time_slot > buffer:
-                        chromosome[toast[time_slot]][sport] = "Buffer"
-                    else:
-                        chromosome[toast[time_slot]][sport] = None
+                    chromosome[toast[time_slot]][sport] = None
                 else:
                     # print(matches[gene[0]][2], ' == ', sport)
                     # print('Appending ', gene[0], ' to already used, which is ', matches[gene[0]])
@@ -95,25 +89,25 @@ def get_teams_list(matches):
     return list(set(teams_list))
 
 def mutation(chromosome,sport_list, matches):
-    for i in range(100):
+    for i in range(30):
         index1 = random.randrange(len(chromosome))
         index_list = random.randrange(len(sport_list))
         teams_list1 = []
         teams_list2 = []
         for match in chromosome[index1]:
-            if(chromosome[index1][match] != None and chromosome[index1][match] != "Buffer"):
+            if(chromosome[index1][match] != None):
                 a = chromosome[index1][match][0]
                 teams_list1.append(matches[a][0])
                 teams_list1.append(matches[a][1])
         index2 = random.randrange(len(chromosome))
         for match in chromosome[index2]:
-            if(chromosome[index2][match] != None and chromosome[index2][match] != "Buffer"):
+            if(chromosome[index2][match] != None):
                 a = chromosome[index2][match][0]
                 teams_list2.append(matches[a][0])
                 teams_list2.append(matches[a][1])
         counter = 0
         total_time_slots = len(chromosome.keys())
-        while (((chromosome[index1][sport_list[index_list]] == "Buffer" or chromosome[index2][sport_list[index_list]] == "Buffer") or not ((len(teams_list1) > len(set(teams_list1))) or (len(teams_list2) > len(set(teams_list2))))) and total_time_slots > counter):
+        while ((not ((len(teams_list1) > len(set(teams_list1))) or (len(teams_list2) > len(set(teams_list2))))) and total_time_slots > counter):
             # print("teams_list1 = ", teams_list1)
             # print("(len(teams_list1) > len(set(teams_list1))) = ", (len(teams_list1) > len(set(teams_list1))))
             # print("(len(teams_list2) > len(set(teams_list2))) = ", (len(teams_list2) > len(set(teams_list2))))
@@ -122,13 +116,13 @@ def mutation(chromosome,sport_list, matches):
             index1 = random.randrange(len(chromosome))
             index2 = random.randrange(len(chromosome))
             for match in chromosome[index1]:
-                if(chromosome[index1][match] != None and chromosome[index1][match] != "Buffer"):
+                if(chromosome[index1][match] != None):
                     a = chromosome[index1][match][0]
                     teams_list1.append(matches[a][0])
                     teams_list1.append(matches[a][1])
             index2 = random.randrange(len(chromosome))
             for match in chromosome[index2]:
-                if(chromosome[index2][match] != None and chromosome[index2][match] != "Buffer"):
+                if(chromosome[index2][match] != None):
                     a = chromosome[index2][match][0]
                     teams_list2.append(matches[a][0])
                     teams_list2.append(matches[a][1])
@@ -137,7 +131,7 @@ def mutation(chromosome,sport_list, matches):
             overlap = False
             if (index1-1 >= 0):
                 for match in chromosome[index1-1]:
-                    if(chromosome[index1-1][match] != None and chromosome[index1-1][match] != "Buffer"):
+                    if(chromosome[index1-1][match] != None):
                         a = chromosome[index1-1][match][0]
                         if (matches[a][0] in teams_list1):
                             overlap = True
@@ -146,14 +140,14 @@ def mutation(chromosome,sport_list, matches):
             
             if (index2-1 >= 0):
                 for match in chromosome[index2-1]:
-                    if(chromosome[index2-1][match] != None and chromosome[index2-1][match] != "Buffer"):
+                    if(chromosome[index2-1][match] != None):
                         a = chromosome[index2-1][match][0]
                         if (matches[a][0] in teams_list2):
                             overlap = True
                         if (matches[a][2] in teams_list2):
                             overlap = True
             counter = 0
-            while ((chromosome[index1][sport_list[index_list]] == "Buffer" or chromosome[index2][sport_list[index_list]] == "Buffer" or not overlap) and total_time_slots > counter):
+            while (not overlap and total_time_slots > counter):
                 # print("chromosome[index1][sport_list[index_list]] == ""Buffer"" = ", chromosome[index1][sport_list[index_list]] == "Buffer")
                 # print("chromosome[index2][sport_list[index_list]] == ""Buffer"" = ", chromosome[index2][sport_list[index_list]] == "Buffer")
                 # print("overlap = ", overlap)
@@ -163,19 +157,19 @@ def mutation(chromosome,sport_list, matches):
                 index1 = random.randrange(len(chromosome))
                 index2 = random.randrange(len(chromosome))
                 for match in chromosome[index1]:
-                    if(chromosome[index1][match] != None and chromosome[index1][match] != "Buffer"):
+                    if(chromosome[index1][match] != None):
                         a = chromosome[index1][match][0]
                         teams_list1.append(matches[a][0])
                         teams_list1.append(matches[a][1])
                 index2 = random.randrange(len(chromosome))
                 for match in chromosome[index2]:
-                    if(chromosome[index2][match] != None and chromosome[index2][match] != "Buffer"):
+                    if(chromosome[index2][match] != None):
                         a = chromosome[index2][match][0]
                         teams_list2.append(matches[a][0])
                         teams_list2.append(matches[a][1])
                 if (index1-1 >= 0):
                     for match in chromosome[index1-1]:
-                        if(chromosome[index1-1][match] != None and chromosome[index1-1][match] != "Buffer"):
+                        if(chromosome[index1-1][match] != None):
                             a = chromosome[index1-1][match][0]
                             if (matches[a][0] in teams_list1):
                                 overlap = True
@@ -184,7 +178,7 @@ def mutation(chromosome,sport_list, matches):
                 
                 if (index2-1 >= 0):
                     for match in chromosome[index2-1]:
-                        if(chromosome[index2-1][match] != None and chromosome[index2-1][match] != "Buffer"):
+                        if(chromosome[index2-1][match] != None):
                             a = chromosome[index2-1][match][0]
                             if (matches[a][0] in teams_list2):
                                 overlap = True
@@ -198,9 +192,6 @@ def mutation(chromosome,sport_list, matches):
         else:
             index1 = random.randrange(len(chromosome))
             index2 = random.randrange(len(chromosome))
-            while (chromosome[index1][sport_list[index_list]] == "Buffer" or chromosome[index2][sport_list[index_list]] == "Buffer"):
-                index1 = random.randrange(len(chromosome))
-                index2 = random.randrange(len(chromosome))
             temp = chromosome[index1][sport_list[index_list]]
             chromosome[index1][sport_list[index_list]] = chromosome[index2][sport_list[index_list]]
             chromosome[index2][sport_list[index_list]] = temp
@@ -241,7 +232,7 @@ def fitness(population, matches):
             # print('timeslot = ',chromosome[time_slot])
             team_list = []
             for entry in population[i][time_slot]:
-                if(population[i][time_slot][entry] != None and population[i][time_slot][entry] != "Buffer"):
+                if(population[i][time_slot][entry] != None):
                     a = population[i][time_slot][entry][0]
                     # print('match_id = ',i)
                     # print('added ', matches[i])
@@ -254,7 +245,7 @@ def fitness(population, matches):
             if(len(team_list)>len(set(team_list))):
                 # print("This not good")
                 total_fitness += 10000
-            if counter % 4 != 0:
+            if counter % 3 != 0:
                 if(len(prev_slot)>0):
                     # print("prev_slot = ",prev_slot)
                     # print("team_list = ",team_list)

@@ -104,7 +104,7 @@ def run(amount_of_overlaps_allowed, filename, generations = 10):
         fittest_idx, second_fittest_idx = ga.select(fitness_scores)
 
     print("fittest: ", fitness_scores[fittest_idx])
-    times = ["16:20", "17:00", "17:40", "18:20"]
+    times = ["16:20", "17:00", "17:40"]
     counter = 0
     for time_slot in population[fittest_idx]:
         if time_slot % 4 == 0: counter+=1
@@ -116,7 +116,7 @@ def run(amount_of_overlaps_allowed, filename, generations = 10):
                 i = population[fittest_idx][time_slot][sport][0]
                 print(matches[i])
     for entry in overlaps[fittest_idx].keys():
-        print('Day ', int(entry / 4)+1, ', ', times[(entry-1) % 4], ' and ', times[entry % 4], ' contains conflict of team(s) ', overlaps[fittest_idx][entry])
+        print('Day ', int(entry / 3)+1, ', ', times[(entry-1) % 3], ' and ', times[entry % 3], ' contains conflict of team(s) ', overlaps[fittest_idx][entry])
            
 
-run(9,"teams.xml", 100)
+run(5,"teams.xml", 100)
