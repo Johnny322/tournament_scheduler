@@ -1,55 +1,52 @@
 <Schedule>
   <Sport>
-	  <Group Id="3061" Group_id="1" Sport="Basketball"/>
-    <Group Id="2062" Group_id="1" Sport="Basketball"/>
-    <Group Id="2063" Group_id="1" Sport="Basketball"/>
-    <Group Id="2064" Group_id="1" Sport="Basketball"/>
-    <Group Id="3065" Group_id="1" Sport="Basketball"/>
-    <Group Id="3066" Group_id="1" Sport="Basketball"/>
+	  <Group Id="3264" Group_id="1" Sport="Basketball"/>
+    <Group Id="3363" Group_id="1" Sport="Basketball"/>
+    <Group Id="3364" Group_id="1" Sport="Basketball"/>
+    <Group Id="3164" Group_id="1" Sport="Basketball"/>
+    <Group Id="3063" Group_id="1" Sport="Basketball"/>
 
-	  <Group Id="2161" Group_id="2" Sport="Basketball"/>
-    <Group Id="3162" Group_id="2" Sport="Basketball"/>
-    <Group Id="2163" Group_id="2" Sport="Basketball"/>
-    <Group Id="3164" Group_id="2" Sport="Basketball"/>
-    <Group Id="2165" Group_id="2" Sport="Basketball"/>
-    <Group Id="3166" Group_id="2" Sport="Basketball"/>
+	  <Group Id="3361" Group_id="2" Sport="Basketball"/>
+    <Group Id="3062" Group_id="2" Sport="Basketball"/>
+    <Group Id="1064" Group_id="2" Sport="Basketball"/>
+    <Group Id="1264" Group_id="2" Sport="Basketball"/>
 
-	  <Group Id="1261" Group_id="3" Sport="Basketball"/>
-    <Group Id="3262" Group_id="3" Sport="Basketball"/>
-    <Group Id="1263" Group_id="3" Sport="Basketball"/>
-    <Group Id="3264" Group_id="3" Sport="Basketball"/>
-    <Group Id="1265" Group_id="3" Sport="Basketball"/>
-    <Group Id="3266" Group_id="3" Sport="Basketball"/>
-
-	  <Group Id="2061" Group_id="1" Sport="Volleyball"/>
-    <Group Id="6062" Group_id="1" Sport="Volleyball"/>
+	  <Group Id="3063" Group_id="1" Sport="Volleyball"/>
+    <Group Id="1264" Group_id="1" Sport="Volleyball"/>
+    <Group Id="1064" Group_id="1" Sport="Volleyball"/>
     <Group Id="1063" Group_id="1" Sport="Volleyball"/>
-    <Group Id="3064" Group_id="1" Sport="Volleyball"/>
+    <Group Id="3363" Group_id="1" Sport="Volleyball"/>
+    <Group Id="3362" Group_id="1" Sport="Volleyball"/>
 
-	  <Group Id="1161" Group_id="2" Sport="Volleyball"/>
-    <Group Id="2162" Group_id="2" Sport="Volleyball"/>
-    <Group Id="8163" Group_id="2" Sport="Volleyball"/>
-    <Group Id="9164" Group_id="2" Sport="Volleyball"/>
+	  <Group Id="3164" Group_id="2" Sport="Volleyball"/>
+    <Group Id="3264" Group_id="2" Sport="Volleyball"/>
+    <Group Id="1364" Group_id="2" Sport="Volleyball"/>
+    <Group Id="3062" Group_id="2" Sport="Volleyball"/>
+    <Group Id="3361" Group_id="2" Sport="Volleyball"/>
+    <Group Id="3162" Group_id="2" Sport="Volleyball"/>
 
-    <Group Id="3261" Group_id="3" Sport="Volleyball"/>
     <Group Id="3262" Group_id="3" Sport="Volleyball"/>
-    <Group Id="2263" Group_id="3" Sport="Volleyball"/>
-    <Group Id="3264" Group_id="3" Sport="Volleyball"/>
+    <Group Id="3061" Group_id="3" Sport="Volleyball"/>
+    <Group Id="1261" Group_id="3" Sport="Volleyball"/>
+    <Group Id="1263" Group_id="3" Sport="Volleyball"/>
+    <Group Id="3364" Group_id="3" Sport="Volleyball"/>
+    <Group Id="Blok 2" Group_id="3" Sport="Volleyball"/>
 
-    <Group Id="2061" Group_id="1" Sport="Football"/>
-    <Group Id="4062" Group_id="1" Sport="Football"/>
-    <Group Id="2063" Group_id="1" Sport="Football"/>
-    <Group Id="3064" Group_id="1" Sport="Football"/>
+    <Group Id="3164" Group_id="1" Sport="Football"/>
+    <Group Id="3062" Group_id="1" Sport="Football"/>
+    <Group Id="3063" Group_id="1" Sport="Football"/>
+    <Group Id="3361" Group_id="1" Sport="Football"/>
+    <Group Id="3264" Group_id="1" Sport="Football"/>
 
-    <Group Id="3161" Group_id="2" Sport="Football"/>
-    <Group Id="2162" Group_id="2" Sport="Football"/>
-    <Group Id="6163" Group_id="2" Sport="Football"/>
-    <Group Id="2164" Group_id="2" Sport="Football"/>
+    <Group Id="1063" Group_id="2" Sport="Football"/>
+    <Group Id="1364" Group_id="2" Sport="Football"/>
+    <Group Id="1064" Group_id="2" Sport="Football"/>
+    <Group Id="3162" Group_id="2" Sport="Football"/>
 
-    <Group Id="3261" Group_id="3" Sport="Football"/>
     <Group Id="3262" Group_id="3" Sport="Football"/>
-    <Group Id="5263" Group_id="3" Sport="Football"/>
-    <Group Id="3264" Group_id="3" Sport="Football"/>
+    <Group Id="3364" Group_id="3" Sport="Football"/>
+    <Group Id="3263" Group_id="3" Sport="Football"/>
+    <Group Id="3363" Group_id="3" Sport="Football"/>
 
   </Sport>
 </Schedule>

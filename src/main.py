@@ -68,6 +68,19 @@ def run(amount_of_overlaps_allowed, filename, generations = 10):
     sport_list = list(sport_dict.keys())
     population = ga.gen_pop(10,matches,time_slots,sport_list)
 
+    # times = ["16:20", "17:00", "17:40", "18:20"]
+    # counter = 0
+    # for time_slot in population[0]:
+    #     if time_slot % 4 == 0:
+    #         counter += 1
+    #     print('Day ', counter, ', ', times[time_slot % 4])
+    #     for sport in population[0][time_slot]:
+    #         if (population[0][time_slot][sport] == "Buffer"):
+    #             print("Buffer")
+    #         elif (population[0][time_slot][sport] != None):
+    #             i = population[0][time_slot][sport][0]
+    #             print(matches[i])
+
     fitness_scores, overlaps = ga.fitness(population, matches)
     fittest_idx, second_fittest_idx = ga.select(fitness_scores)
 
@@ -78,18 +91,19 @@ def run(amount_of_overlaps_allowed, filename, generations = 10):
 
         #Create 2 new children from the 2 fittest parents
         child1, child2 = ga.crossover(fittest, second_fittest)
-        child1 = ga.mutation(child1, sport_list)
-        child2 = ga.mutation(child2, sport_list)
+        child1 = ga.mutation(child1, sport_list, matches)
+        child2 = ga.mutation(child2, sport_list, matches)
     
         #replace least fit with most fit's offspring
         least_fit1, least_fit2 = ga.find_least_fit(fitness_scores)
         population[least_fit1] = child1
         population[least_fit2] = child2
         for chromosome in range(len(population)):
-            population[chromosome] = ga.mutation(population[chromosome], sport_list)
+            population[chromosome] = ga.mutation(population[chromosome], sport_list, matches)
         fitness_scores, overlaps = ga.fitness(population, matches)
         fittest_idx, second_fittest_idx = ga.select(fitness_scores)
 
+    print("fittest: ", fitness_scores[fittest_idx])
     times = ["16:20", "17:00", "17:40", "18:20"]
     counter = 0
     for time_slot in population[fittest_idx]:
@@ -105,4 +119,4 @@ def run(amount_of_overlaps_allowed, filename, generations = 10):
         print('Day ', int(entry / 4)+1, ', ', times[(entry-1) % 4], ' and ', times[entry % 4], ' contains conflict of team(s) ', overlaps[fittest_idx][entry])
            
 
-run(4,"teams.xml", 100)
+run(9,"teams.xml", 100)

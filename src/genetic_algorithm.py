@@ -85,12 +85,119 @@ def crossover(parent1, parent2):
 
     return child1, child2
 
-def mutation(chromosome,sport_list, mutate_probability = 0.5):
-    for i in range(75):
+def get_teams_list(matches):
+    teams_list = []
+    for match in matches:
+        if(matches[match] != None):
+            a = matches[match][0]
+            teams_list.append(match[a][0])
+            teams_list.append(match[a][1])
+    return list(set(teams_list))
+
+def mutation(chromosome,sport_list, matches):
+    for i in range(100):
         index1 = random.randrange(len(chromosome))
-        index2 = random.randrange(len(chromosome))
         index_list = random.randrange(len(sport_list))
-        if not(random.random() > mutate_probability):
+        teams_list1 = []
+        teams_list2 = []
+        for match in chromosome[index1]:
+            if(chromosome[index1][match] != None and chromosome[index1][match] != "Buffer"):
+                a = chromosome[index1][match][0]
+                teams_list1.append(matches[a][0])
+                teams_list1.append(matches[a][1])
+        index2 = random.randrange(len(chromosome))
+        for match in chromosome[index2]:
+            if(chromosome[index2][match] != None and chromosome[index2][match] != "Buffer"):
+                a = chromosome[index2][match][0]
+                teams_list2.append(matches[a][0])
+                teams_list2.append(matches[a][1])
+        counter = 0
+        total_time_slots = len(chromosome.keys())
+        while (((chromosome[index1][sport_list[index_list]] == "Buffer" or chromosome[index2][sport_list[index_list]] == "Buffer") or not ((len(teams_list1) > len(set(teams_list1))) or (len(teams_list2) > len(set(teams_list2))))) and total_time_slots > counter):
+            # print("teams_list1 = ", teams_list1)
+            # print("(len(teams_list1) > len(set(teams_list1))) = ", (len(teams_list1) > len(set(teams_list1))))
+            # print("(len(teams_list2) > len(set(teams_list2))) = ", (len(teams_list2) > len(set(teams_list2))))
+            teams_list1 = []
+            teams_list2 = []
+            index1 = random.randrange(len(chromosome))
+            index2 = random.randrange(len(chromosome))
+            for match in chromosome[index1]:
+                if(chromosome[index1][match] != None and chromosome[index1][match] != "Buffer"):
+                    a = chromosome[index1][match][0]
+                    teams_list1.append(matches[a][0])
+                    teams_list1.append(matches[a][1])
+            index2 = random.randrange(len(chromosome))
+            for match in chromosome[index2]:
+                if(chromosome[index2][match] != None and chromosome[index2][match] != "Buffer"):
+                    a = chromosome[index2][match][0]
+                    teams_list2.append(matches[a][0])
+                    teams_list2.append(matches[a][1])
+            counter += 1
+        if (counter >= total_time_slots):
+            overlap = False
+            if (index1-1 >= 0):
+                for match in chromosome[index1-1]:
+                    if(chromosome[index1-1][match] != None and chromosome[index1-1][match] != "Buffer"):
+                        a = chromosome[index1-1][match][0]
+                        if (matches[a][0] in teams_list1):
+                            overlap = True
+                        if (matches[a][2] in teams_list1):
+                            overlap = True
+            
+            if (index2-1 >= 0):
+                for match in chromosome[index2-1]:
+                    if(chromosome[index2-1][match] != None and chromosome[index2-1][match] != "Buffer"):
+                        a = chromosome[index2-1][match][0]
+                        if (matches[a][0] in teams_list2):
+                            overlap = True
+                        if (matches[a][2] in teams_list2):
+                            overlap = True
+            counter = 0
+            while ((chromosome[index1][sport_list[index_list]] == "Buffer" or chromosome[index2][sport_list[index_list]] == "Buffer" or not overlap) and total_time_slots > counter):
+                # print("chromosome[index1][sport_list[index_list]] == ""Buffer"" = ", chromosome[index1][sport_list[index_list]] == "Buffer")
+                # print("chromosome[index2][sport_list[index_list]] == ""Buffer"" = ", chromosome[index2][sport_list[index_list]] == "Buffer")
+                # print("overlap = ", overlap)
+                overlap = False
+                teams_list1 = []
+                teams_list2 = []
+                index1 = random.randrange(len(chromosome))
+                index2 = random.randrange(len(chromosome))
+                for match in chromosome[index1]:
+                    if(chromosome[index1][match] != None and chromosome[index1][match] != "Buffer"):
+                        a = chromosome[index1][match][0]
+                        teams_list1.append(matches[a][0])
+                        teams_list1.append(matches[a][1])
+                index2 = random.randrange(len(chromosome))
+                for match in chromosome[index2]:
+                    if(chromosome[index2][match] != None and chromosome[index2][match] != "Buffer"):
+                        a = chromosome[index2][match][0]
+                        teams_list2.append(matches[a][0])
+                        teams_list2.append(matches[a][1])
+                if (index1-1 >= 0):
+                    for match in chromosome[index1-1]:
+                        if(chromosome[index1-1][match] != None and chromosome[index1-1][match] != "Buffer"):
+                            a = chromosome[index1-1][match][0]
+                            if (matches[a][0] in teams_list1):
+                                overlap = True
+                            if (matches[a][2] in teams_list1):
+                                overlap = True
+                
+                if (index2-1 >= 0):
+                    for match in chromosome[index2-1]:
+                        if(chromosome[index2-1][match] != None and chromosome[index2-1][match] != "Buffer"):
+                            a = chromosome[index2-1][match][0]
+                            if (matches[a][0] in teams_list2):
+                                overlap = True
+                            if (matches[a][2] in teams_list2):
+                                overlap = True
+                counter += 1
+        if (counter < total_time_slots):
+            temp = chromosome[index1][sport_list[index_list]]
+            chromosome[index1][sport_list[index_list]] = chromosome[index2][sport_list[index_list]]
+            chromosome[index2][sport_list[index_list]] = temp
+        else:
+            index1 = random.randrange(len(chromosome))
+            index2 = random.randrange(len(chromosome))
             while (chromosome[index1][sport_list[index_list]] == "Buffer" or chromosome[index2][sport_list[index_list]] == "Buffer"):
                 index1 = random.randrange(len(chromosome))
                 index2 = random.randrange(len(chromosome))
