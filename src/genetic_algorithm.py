@@ -86,7 +86,7 @@ def crossover(parent1, parent2):
     return child1, child2
 
 def mutation(chromosome,sport_list, mutate_probability = 0.5):
-    for i in range(1000):
+    for i in range(75):
         index1 = random.randrange(len(chromosome))
         index2 = random.randrange(len(chromosome))
         index_list = random.randrange(len(sport_list))

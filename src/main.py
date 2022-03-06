@@ -1,8 +1,5 @@
 #External Modules/libraries
 import xml.etree.ElementTree as ET
-import random, sys, math
-from bs4 import BeautifulSoup
-import os
 
 #Selfwritten
 import genetic_algorithm as ga
@@ -91,7 +88,6 @@ def run(amount_of_overlaps_allowed, filename, generations = 10):
         for chromosome in range(len(population)):
             population[chromosome] = ga.mutation(population[chromosome], sport_list)
         fitness_scores, overlaps = ga.fitness(population, matches)
-        print("scores = ",fitness_scores)
         fittest_idx, second_fittest_idx = ga.select(fitness_scores)
 
     times = ["16:20", "17:00", "17:40", "18:20"]
@@ -109,4 +105,4 @@ def run(amount_of_overlaps_allowed, filename, generations = 10):
         print('Day ', int(entry / 4)+1, ', ', times[(entry-1) % 4], ' and ', times[entry % 4], ' contains conflict of team(s) ', overlaps[fittest_idx][entry])
            
 
-run(5,"teams.xml", 100)
+run(4,"teams.xml", 100)
